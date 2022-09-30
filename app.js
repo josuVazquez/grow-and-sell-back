@@ -1,4 +1,4 @@
-require('dotenv').config({path: __dirname + '/.env'});
+require("dotenv").config();
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -7,17 +7,10 @@ const logger = require('morgan');
 const app = express();
 
 require('./dbConfig');
-require('./midelware/auth');
-const passport = require('passport');
-
-app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
+const authMiddleware = require("./midelware/auth");
 
 const userRouter = require('./routes/user.router');
 const productRouter = require('./routes/product.router');
-const authRouter = require('./routes/auth.router');
-
 
 app.set('port', process.env.PORT | 3000);
 app.use(logger('dev'));
@@ -26,9 +19,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use("/", authMiddleware);
 app.use('/user', userRouter);
 app.use('/product', productRouter);
-app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -45,5 +38,4 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 module.exports = app;
