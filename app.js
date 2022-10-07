@@ -5,6 +5,11 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const { initializeApp, applicationDefault } = require("firebase-admin/app");
+initializeApp({
+  credential: applicationDefault(),
+  projectId: 'growandsell-63435',
+});
 const app = express();
 
 app.use(cors());
@@ -38,6 +43,5 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
 });
 module.exports = app;

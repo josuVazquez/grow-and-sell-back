@@ -5,9 +5,12 @@ const userSchema = new Schema({
     _id: {
         type: String
     },
-    avatar: {
+    photoURL: {
         type: String,
         default: null
+    },
+    rating: {
+        type: Number,
     },
     name: {
         type: String,
@@ -19,11 +22,11 @@ const userSchema = new Schema({
         type: String,
         default: null
     },
-    latitude: {
+    lat: {
         type: String,
         default: null
     },
-    longitude: {
+    long: {
         type: String,
         default: null
     },

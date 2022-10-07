@@ -14,8 +14,14 @@ function authMiddleware(request, response, next) {
   firebase
     .auth()
     .verifyIdToken(token)
-    .then(() => next())
-    .catch(() => response.send({ message: "Could not authorize" }).status(403));
+    .then((res) => {
+      request.token = res;
+      next()
+    })
+    .catch((err) => {
+      console.log(err)
+      response.send({ message: "Could not authorize" }).status(403)
+    });
 }
 
 module.exports = authMiddleware;

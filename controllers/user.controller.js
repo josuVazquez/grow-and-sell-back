@@ -11,6 +11,13 @@ const updateUser = async (req, res, next) => {
 
 const createUser = async (req, res, next) => {
     try {
+        const userExist = await User.findOne({email: req.token.email});
+        if(userExist) {
+            res.json(userExist)
+            next()
+            return
+        }
+        console.log('creating')
         const user = await User.create(req.body);
         res.json(user);
     } catch (error) {
