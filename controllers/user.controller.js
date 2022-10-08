@@ -1,4 +1,4 @@
-const User = require("../models/Product");
+const User = require("../models/User");
 
 const updateUser = async (req, res, next) => {
     try {
@@ -17,7 +17,6 @@ const createUser = async (req, res, next) => {
             next()
             return
         }
-        console.log('creating')
         const user = await User.create(req.body);
         res.json(user);
     } catch (error) {
@@ -25,7 +24,17 @@ const createUser = async (req, res, next) => {
     }
 };
 
+const getUser = async(req, res, next) => {
+    try {
+        const userExist = await User.findOne({email: req.token.email});
+        res.json(userExist)
+    } catch (error) {
+        return next(error)
+    }
+}
+
 module.exports = {
     updateUser,
-    createUser
+    createUser,
+    getUser
 } 

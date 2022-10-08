@@ -9,6 +9,10 @@ const userSchema = new Schema({
         type: String,
         default: null
     },
+    phoneNumber: {
+        type: String,
+        default: null
+    },
     rating: {
         type: Number,
     },
@@ -40,6 +44,6 @@ const userSchema = new Schema({
         ref:'Product',
         default: []}
     ]
-}, { _id: false });
+});
 
 module.exports = mongoose.model('user', userSchema);
