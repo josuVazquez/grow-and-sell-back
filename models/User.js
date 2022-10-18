@@ -22,7 +22,7 @@ const userSchema = new Schema({
     email: {
         type: String
     },
-    raiting: {
+    rating: {
         type: String,
         default: null
     },
@@ -30,7 +30,7 @@ const userSchema = new Schema({
         type: String,
         default: null
     },
-    long: {
+    lng: {
         type: String,
         default: null
     },
@@ -39,7 +39,7 @@ const userSchema = new Schema({
         ref:'Product',
         default: []}
     ],
-    purchasedPoducts: [{
+    purchasedProducts: [{
         type: Schema.Types.ObjectId, 
         ref:'Product',
         default: []}
