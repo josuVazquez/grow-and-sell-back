@@ -17,7 +17,7 @@ const userSchema = new Schema({
     rating: {
         type: Number,
     },
-    name: {
+    displayName: {
         type: String,
     },
     email: {
