@@ -14,7 +14,8 @@ const createUser = async (req, res, next) => {
     try {
         const userExist = await User.findOne({email: req.token.email});
         if(userExist) {
-            return next()
+            res.json(userExist);
+            return
         }
         const user = await User.create(req.body);
         res.json(user);
