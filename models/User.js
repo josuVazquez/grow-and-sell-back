@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    _id: {
-        type: String
+    uid: {
+        type: String,
+        default: null
     },
     photoURL: {
         type: String,
