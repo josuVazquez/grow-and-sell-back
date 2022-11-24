@@ -39,7 +39,22 @@ const createProduct = async (req, res, next) => {
 
 const getProductsByCoord = async (req, res, next) => {
     try {
-        const product = await User.find(req.body);
+        const lat = +req.params.lat;
+        const lng = +req.params.lng;
+        const res = await User.aggregate([
+            // Project a diff field that's the absolute difference along with the original doc.
+            {$project: {diff: {$abs: {$subtract: [lat, +'$lat']}}, doc: '$$ROOT'}},
+            // Order the docs by diff
+            {$sort: {diff: 1}},
+            // Take the first one
+            {$limit: 10}
+        ])
+        console.log(res)
+
+        console.log(UsersSmallerLat)
+        console.log(UsersBiggerLat)
+        console.log(UsersSmallerLng)
+        console.log(UsersBiggerLng)
         res.json(product);
     } catch (error) {
         return next(error)

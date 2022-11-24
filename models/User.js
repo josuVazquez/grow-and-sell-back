@@ -35,6 +35,11 @@ const userSchema = new Schema({
         type: String,
         default: null
     },
+    favoriteProducts: [{
+        type: Schema.Types.ObjectId, 
+        ref:'Product',
+        default: []}
+    ],
     onSellProducts: [{
         type: Schema.Types.ObjectId, 
         ref:'Product',

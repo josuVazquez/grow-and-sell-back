@@ -17,6 +17,10 @@ const productSchema = new Schema({
     currency: {
         type: String,
     },
+    images: [{
+        type: String,
+        default: ''
+    }]
 });
 
 module.exports = mongoose.model('product', productSchema);

@@ -10,6 +10,6 @@ router.put('/:id', updateProduct);
 
 router.delete('/:id', deleteProduct);
 
-router.get('/:coord', getProductsByCoord);
+router.get('/:lat/:lng', getProductsByCoord);
 
 module.exports = router;

@@ -5,6 +5,7 @@ const router = express.Router();
 router.put('/', updateUser)
 
 router.get('/', getUser)
+router.get('/dummy', dummy)
 
 router.post('/', createUser)
 

@@ -10,7 +10,6 @@ const updateUser = async (req, res, next) => {
 };
 
 const createUser = async (req, res, next) => {
-    console.log('Creating user');
     try {
         const userExist = await User.findOne({email: req.token.email});
         if(userExist) {
@@ -31,6 +30,12 @@ const getUser = async(req, res, next) => {
     } catch (error) {
         return next(error)
     }
+}
+
+const dummy = async(req, res, next) => {
+    setTimeout(() => {
+        res.json({ res: 'Hola'})
+    }, 40000);
 }
 
 module.exports = {
