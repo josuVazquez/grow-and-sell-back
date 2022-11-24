@@ -41,5 +41,6 @@ const dummy = async(req, res, next) => {
 module.exports = {
     updateUser,
     createUser,
-    getUser
+    getUser,
+    dummy
 } 
