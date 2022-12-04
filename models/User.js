@@ -39,16 +39,6 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId, 
         ref:'Product',
         default: []}
-    ],
-    onSellProducts: [{
-        type: Schema.Types.ObjectId, 
-        ref:'Product',
-        default: []}
-    ],
-    purchasedProducts: [{
-        type: Schema.Types.ObjectId, 
-        ref:'Product',
-        default: []}
     ]
 });
 

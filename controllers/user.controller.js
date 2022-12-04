@@ -25,22 +25,43 @@ const createUser = async (req, res, next) => {
 
 const getUser = async(req, res, next) => {
     try {
-        const userExist = await User.findOne({email: req.token.email});
+        const userExist = await User.findOne({email: req.token.email}).populate('favoriteProducts').exec((error, populated) => {
+            console.log(error)
+            console.log(populated)
+            if(error) {
+                return;
+            }
+            resolve(populated)
+        });
+
         res.json(userExist)
     } catch (error) {
         return next(error)
     }
 }
 
-const dummy = async(req, res, next) => {
-    setTimeout(() => {
-        res.json({ res: 'Hola'})
-    }, 40000);
+const addFavorite = async(req, res, next) => {
+    try {
+        const updated = await User.updateOne({email: req.token.email}, { $push: { favoriteProducts: req.params.productId } })
+        console.log(updated);
+    } catch (error) {
+        return next(error)
+    }
+}
+
+const removeFavorite = async(req, res, next) => {
+    try {
+        const updated = await User.updateOne({email: req.token.email}, { $pull: { favoriteProducts: req.params.productId } })
+        console.log(updated);
+    } catch (error) {
+        return next(error)
+    }
 }
 
 module.exports = {
     updateUser,
     createUser,
     getUser,
-    dummy
-} 
+    addFavorite,
+    removeFavorite
+}

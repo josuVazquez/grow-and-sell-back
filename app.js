@@ -14,7 +14,7 @@ const app = express();
 
 app.use(cors());
 require('./dbConfig');
-const authMiddleware = require("./midelware/auth");
+const authMiddleware = require("./middleware/auth");
 
 const userRouter = require('./routes/user.router');
 const productRouter = require('./routes/product.router');
@@ -26,8 +26,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/user', userRouter);
 app.use("/", authMiddleware);
+app.use('/user', userRouter);
 app.use('/product', productRouter);
 
 // catch 404 and forward to error handler

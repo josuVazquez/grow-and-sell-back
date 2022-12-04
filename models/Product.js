@@ -20,7 +20,11 @@ const productSchema = new Schema({
     images: [{
         type: String,
         default: ''
-    }]
+    }],
+    productOwner: {
+        type: Schema.ObjectId,
+        ref: 'Users'
+    }
 });
 
 module.exports = mongoose.model('product', productSchema);
